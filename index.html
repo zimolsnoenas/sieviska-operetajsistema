@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLADE: sievišķā operētājsistēma</title>
+    <title>CIKLS: sievišķā operētājsistēma</title>
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -67,7 +67,7 @@
             <option value="Oracle">lasu starp rindiņām</option>
         </select>
 
-        <label>garšo ēst (Cravings)</label>
+        <label>garšo ēst </label>
         <div class="chip-grid">
             <div class="chip craving" onclick="chipToggle(this)" data-id="Salt">sāļš</div>
             <div class="chip craving" onclick="chipToggle(this)" data-id="Sweet">salds</div>
@@ -85,7 +85,7 @@
             <div class="chip ritual" onclick="this.classList.toggle('active')">nosnaudos</div>
         </div>
 
-        <div class="intel-box" id="intel">Gaidu enerģijas nolasījumu...</div>
+        <div class="intel-box" id="intel">nolasu enerģiju...</div>
 
         <label>manas domas un sajūtas</label>
         <textarea id="notes" rows="3" placeholder="ieraksti savu haosu šeit..."></textarea>
@@ -99,17 +99,17 @@
         const modeIntel = {
             Executive: "<b>BIZ:</b> biznesa haizivs režīms. esi redzama, skaļa un parādi pasaulei, ka esi šeit. izdari tos darbus, ko atliki citu dienu.",
             Ghost: "<b>BIZ:</b> šī ir Tava oficiālā atļauja šodien būt kartupelim. nenoslogo sevi ar uzdevumiem, kas var pagaidīt. labs laiks izanalizēt analītikas datus. :)",
-            Siren: "<b>BIZ:</b> šodien Tev ir atvērusies kosmiska čakra. labs laiks, lai atvieglotu dzīvi uz priekšdienām (veidot saturu, komunicēt, draudzēties).",
+            Siren: "<b>BIZ:</b> šodien Tev ir atvērusies kosmiska čakra. labs laiks, lai atvieglotu dzīvi uz priekšdienām (veidot saturu, komunicēt, draudzēties utt).",
             Oracle: "<b>BIZ:</b> stratēģija ir Tavs otrais vārds. labs laiks 'izravēt' savu saturu, piedāvājumu un citas lietas."
         };
 
         const craveIntel = {
             Salt: "<b>FEED:</b> Tavs organisms grib minerāļus un pēc iespējas mazāk stresa. padzeries ūdeni, dziļi ieelpo, Tu esi drošībā.",
-            Sweet: "<b>FEED:</b> Tavs organisms pieprasa enerģijas lādiņu. Iespējams dopamīna trūkums. Pabeidz kādu sīkumu vai izstaipies.",
-            Savory: "<b>FEED:</b> Tavs organisms grib proteīnus. Šoreiz atpūta ir produktīvākais, ko vari darīt.",
-            Spicy: "<b>FEED:</b> Tavam ķermenim vajag sajust, ka tas ir dzīvs. Endorfīnu medības!",
+            Sweet: "<b>FEED:</b> Tavs organisms pieprasa enerģijas lādiņu. iespējams dopamīna trūkums. pabeidz kādu sīkumu vai izstaipies.",
+            Savory: "<b>FEED:</b> Tavs organisms grib proteīnus. šoreiz atpūta ir produktīvākais, ko vari darīt.",
+            Spicy: "<b>FEED:</b> Tavam ķermenim vajag sajust, ka tas ir dzīvs. endorfīnu medības!",
             Sour: "<b>FEED:</b> Tavs gremošanas trakts prasa palīdzību, lai labāk funkcionētu.",
-            Bitter: "<b>FEED:</b> Tavas aknas grib palīdzīgu roku liekā izvadei. Atvieglo tām darbu."
+            Bitter: "<b>FEED:</b> Tavas aknas grib palīdzīgu roku liekā izvadei. atvieglo tām darbu."
         };
 
         function toggleBleed() {
@@ -163,4 +163,5 @@
         updateIntel();
     </script>
 </body>
+
 </html>
