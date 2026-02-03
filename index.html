@@ -156,7 +156,7 @@
             h.forEach(e => {
                 const bClass = e.bleeding ? 'is-bleeding' : '';
                 const bTag = e.bleeding ? '<span style="color:var(--bleed)">🩸 PLŪDI</span> | ' : '';
-                container.innerHTML += `<div class="entry ${bClass}"><strong>${e.date}</strong> | ${bTag}${e.vibe}<br><small>MIEGS: ${e.sleep}/5 | KĀRE: ${e.cravings.join(', ') || '-'}</small><br><small>RITUĀLI: ${e.rituals.join(', ') || '-'}</small><p>${e.notes}</p></div>`;
+                container.innerHTML += `<div class="entry ${bClass}"><strong>${e.date}</strong> | ${bTag}${e.vibe}<br><small>miegs: ${e.sleep}/5 | garšo: ${e.cravings.join(', ') || '-'}</small><br><small>rūpes: ${e.rituals.join(', ') || '-'}</small><p>${e.notes}</p></div>`;
             });
         }
         load();
@@ -165,5 +165,6 @@
 </body>
 
 </html>
+
 
 
