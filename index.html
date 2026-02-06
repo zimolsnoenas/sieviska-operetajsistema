@@ -61,10 +61,10 @@
 
         <label>smadzeņu kapacitāte</label>
         <select id="vibe" onchange="updateIntel()">
-            <option value="biznesa haizivs">visi malā, es te eju!</option>
-            <option value="kartupelis">miglas rīts/diena/vakars</option>
-            <option value="kompānijas dvēsele">sabiedrības dvēsele</option>
-            <option value="orākuls">lasu starp rindiņām</option>
+            <option value="kosmiskā CEO">kosmiskā CEO: visi malā, es te eju!</option>
+            <option value="error 404">error 404: domas nav atrastas</option>
+            <option value="sociālā baterija: 100%">sociālā baterija 100%: sabiedrības dvēsele</option>
+            <option value="slēptās funkcijas: ON">slēptās funcijas ON: lasu starp rindiņām</option>
         </select>
 
         <label>garšo ēst </label>
@@ -75,13 +75,17 @@
             <div class="chip craving" onclick="chipToggle(this)" data-id="Spicy">asumiņš</div>
             <div class="chip craving" onclick="chipToggle(this)" data-id="Sour">skābs</div>
             <div class="chip craving" onclick="chipToggle(this)" data-id="Bitter">rūgts</div>
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Crunchy">kraukšķis</div>
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Creamy">krēmīgs</div>
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Warm">silts</div>
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Cold">auksts</div>
         </div>
 
         <label>laiks man</label>
         <div class="chip-grid">
             <div class="chip ritual" onclick="this.classList.toggle('active')">izvēlējos sevi</div>
             <div class="chip ritual" onclick="this.classList.toggle('active')">pastaigājos</div>
-            <div class="chip ritual" onclick="this.classList.toggle('active')">pasūtīju visu d***t</div>
+            <div class="chip ritual" onclick="this.classList.toggle('active')">pasūtīju visus d***t</div>
             <div class="chip ritual" onclick="this.classList.toggle('active')">nosnaudos</div>
         </div>
 
@@ -97,19 +101,23 @@
 
     <script>
         const modeIntel = {
-            "biznesa haizivs": "<b>šodienas frekvence:</b> biznesa haizivs režīms. esi redzama, skaļa un parādi pasaulei, ka esi šeit. izdari tos darbus, ko atliki citu dienu.",
-            "kartupelis": "<b>šodienas frekvence:</b> šī ir Tava oficiālā atļauja šodien būt kartupelim. nenoslogo sevi ar uzdevumiem, kas var pagaidīt. labs laiks izanalizēt analītikas datus. :)",
-            "kompānijas dvēsele": "<b>šodienas frekvence:</b> šodien Tev ir atvērusies kosmiska čakra. labs laiks, lai atvieglotu dzīvi uz priekšdienām (veidot saturu, komunicēt, draudzēties utt).",
-            "orākuls": "<b>šodienas frekvence:</b> stratēģija ir Tavs otrais vārds. labs laiks 'izravēt' savu saturu, piedāvājumu un citas lietas."
+            "kosmiskā CEO": "<b>šodienas frekvence:</b> biznesa lēdijas režīms. esi redzama, skaļa un parādi pasaulei, ka esi šeit. izdari tos darbus, ko atliki citu dienu.",
+            "error 404": "<b>šodienas frekvence:</b> šī ir Tava oficiālā atļauja šodien būt aizkadrā. nenoslogo sevi ar uzdevumiem, kas var pagaidīt. labs laiks izanalizēt analītikas datus. :)",
+            "sociālā baterija: 100%": "<b>šodienas frekvence:</b> šodien Tev ir atvērusies kosmiska čakra. labs laiks, lai atvieglotu dzīvi uz priekšdienām (veidot saturu, komunicēt, draudzēties utt).",
+            "slēptās funkcijas: ON": "<b>šodienas frekvence:</b> stratēģija ir Tavs otrais vārds. labs laiks 'izravēt' savu saturu, piedāvājumu un citas lietas, kuras šķiet 'iesprūdušas'."
         };
 
         const craveIntel = {
-            Salt: "<b>sistēma:</b> Tavs organisms grib minerāļus un pēc iespējas mazāk stresa. padzeries ūdeni, dziļi ieelpo, Tu esi drošībā.",
-            Sweet: "<b>sistēma:</b> Tavs organisms pieprasa enerģijas lādiņu. iespējams dopamīna trūkums. pabeidz kādu sīkumu vai izstaipies.",
-            Savory: "<b>sistēma:</b> Tavs organisms grib proteīnus. šoreiz atpūta ir produktīvākais, ko vari darīt.",
-            Spicy: "<b>sistēma:</b> Tavam ķermenim vajag sajust, ka tas ir dzīvs. endorfīnu medības!",
-            Sour: "<b>sistēma:</b> Tavs gremošanas trakts prasa palīdzību, lai labāk funkcionētu.",
-            Bitter: "<b>sistēma:</b> Tavas aknas grib palīdzīgu roku liekā izvadei. atvieglo tām darbu."
+            Salt: "<b>sistēma:</b> Tavs organisms grib minerāļus un pēc iespējas mazāk stresa. padzeries ūdeni, dziļi ieelpo, Tu esi drošībā. pievērs uzmanību sirdsdarbībai (sitieni x min), asinsspiedienam un vielmaiņai.",
+            Sweet: "<b>sistēma:</b> Tavs organisms pieprasa enerģijas lādiņu. iespējams dopamīna trūkums. pabeidz kādu sīkumu vai izstaipies. pievērs uzmanību savai atmiņai, miega kvalitātei un imūnsistēmai.",
+            Savory: "<b>sistēma:</b> Tavs organisms grib proteīnus, dzelzi, B-vitamīnus. šoreiz atpūta ir produktīvākais, ko vari darīt. pievērs uzmanību noguruma līmenim, un samazini mentālo slogu, ja tas ir iespējams.",
+            Spicy: "<b>sistēma:</b> Tavam ķermenim vajag sajust, ka tas ir dzīvs. endorfīnu medības! pievērs uzmanību sāpēm ķermenī un vispārīgam pašsajūtas līmenim.",
+            Sour: "<b>sistēma:</b> Tavs gremošanas trakts prasa palīdzību, lai labāk funkcionētu. pievērs uzmanību sajūtām pēc ēšanas un vēdera izejai.",
+            Bitter: "<b>sistēma:</b> Tavas aknas grib palīdzīgu roku liekā izvadei. atvieglo tām darbu. pievērs uzmanību sajūtām ķermenī, rūgti ēdieni 'atdzesē', iespējams iekaisuma indikators.",
+            Crunchy: "<b>sistēma:</b> Tavs ķermenis grib atbrīvoties no spriedzes/stresa. iespējams, ka Tev ir pārāk liels mentālais slogs, vai trauksmes pazīmes. īsa sazemēšanās taktika un kraukšķīgs našķis palīdzēs atslābināties.",
+            Creamy: "<b>sistēma:</b> Tavs ķermenis alkst pēc nedaudz maiguma un rūpēm. pievērs uzmanību savām emocijām un sajūtām ķermenī. nekautrējies uzrunāt kādu tuvu cilvēku tāpat vien, mums visiem ik pa laikam vajag ar kādu izrunāties par visu un neko. :)",
+            Warm: "<b>sistēma:</b> Tavs ķermenis vēlas drošības sajūtu. pievērs uzmanību savai gremošanas sistēmai un stresa līmenim. nekautrējies uzrunāt sev tuvu cilvēku, ja jūti, ka dzīve notiek pārāk strauji.",
+            Cold: "<b>sistēma:</b> Tavs ķermenis vēlas 'pamosties' vai arī iekšēji atvēsināties. pievērs uzmanību 'miglainām' domām un tam, kā Tu izjūti emocijas un sajūtas."
         };
 
         function toggleBleed() {
@@ -150,21 +158,36 @@
             location.reload(); 
         }
 
-        function load() {
-            let h = JSON.parse(localStorage.getItem('bladeLV_v3')) || [];
-            const container = document.getElementById('history');
-            h.forEach(e => {
-                const bClass = e.bleeding ? 'is-bleeding' : '';
-                const bTag = e.bleeding ? '<span style="color:var(--bleed)">🩸 PLŪDI</span> | ' : '';
-                container.innerHTML += `<div class="entry ${bClass}"><strong>${e.date}</strong> | ${bTag}${e.vibe}<br><small>miegs: ${e.sleep}/5 | garšo: ${e.cravings.join(', ') || '-'}</small><br><small>rūpes: ${e.rituals.join(', ') || '-'}</small><p>${e.notes}</p></div>`;
-            });
-        }
+       function load() {
+    let h = JSON.parse(localStorage.getItem('bladeLV_v3')) || [];
+    const container = document.getElementById('history');
+
+    let html = "";
+
+    h.forEach(e => {
+        const bClass = e.bleeding ? 'is-bleeding' : '';
+        const bTag = e.bleeding ? '<span style="color:var(--bleed)">🩸 PLŪDI</span> | ' : '';
+
+        html += `<div class="entry ${bClass}">
+            <strong>${e.date}</strong> | ${bTag}${e.vibe}
+            <br>
+            <small>miegs: ${e.sleep}/5 | garšo: ${e.cravings.join(', ') || '-'}</small>
+            <br>
+            <small>rūpes: ${e.rituals.join(', ') || '-'}</small>
+            <p>${e.notes}</p>
+        </div>`;
+    });
+
+    container.innerHTML = html;
+}
+
         load();
         updateIntel();
     </script>
 </body>
 
 </html>
+
 
 
 
