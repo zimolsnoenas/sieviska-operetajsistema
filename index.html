@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="lv">
 <head>
     <meta charset="UTF-8">
@@ -18,204 +17,213 @@
         h1 { font-family: 'Abril Fatface', serif; color: var(--accent); letter-spacing: 2px; font-size: 2.2rem; text-align: center; margin-bottom: 5px; }
         .card { background: var(--card); padding: 25px; border-radius: 20px; border: 1px solid rgba(199, 130, 143, 0.2); margin-bottom: 20px; }
         label { display: block; margin: 20px 0 8px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); font-weight: 800; }
+        
+        select, textarea, button { width: 100%; padding: 15px; background: #1a0b14; border: 1px solid #2a1521; color: var(--text); border-radius: 12px; font-size: 1rem; box-sizing: border-box;}
+        
+        .chip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .chip { background: #1a0b14; border: 1px solid #2a1521; padding: 12px; border-radius: 8px; text-align: center; cursor: pointer; font-size: 0.75rem; transition: 0.2s; }
+        .chip.active { background: var(--accent); color: var(--card); font-weight: bold; border-color: var(--accent); }
+        
+        #bleedToggle { background: #1a0b14; border: 2px solid #551111; color: #551111; font-weight: 800; padding: 15px; cursor: pointer; border-radius: 12px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; text-align: center; }
+        #bleedToggle.active { 
+            background: var(--bleed); 
+            color: white; 
+            border-color: #ff5555;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); 
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse { 
+            0% { transform: scale(1); box-shadow: 0 0 10px var(--bleed); }
+            15% { transform: scale(1.03); box-shadow: 0 0 25px var(--bleed); }
+            30% { transform: scale(1); box-shadow: 0 0 10px var(--bleed); }
+            45% { transform: scale(1.03); box-shadow: 0 0 25px var(--bleed); }
+            100% { transform: scale(1); box-shadow: 0 0 10px var(--bleed); }
+        }
 
-```
-    select, textarea, button { width: 100%; padding: 15px; background: #1a0b14; border: 1px solid #2a1521; color: var(--text); border-radius: 12px; font-size: 1rem; box-sizing: border-box;}
-    
-    .chip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .chip { background: #1a0b14; border: 1px solid #2a1521; padding: 12px; border-radius: 8px; text-align: center; cursor: pointer; font-size: 0.75rem; transition: 0.2s; }
-    .chip.active { background: var(--accent); color: var(--card); font-weight: bold; border-color: var(--accent); }
-    
-    #bleedToggle { background: #1a0b14; border: 2px solid #551111; color: #551111; font-weight: 800; padding: 15px; cursor: pointer; border-radius: 12px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; text-align: center; }
-    #bleedToggle.active { 
-        background: var(--bleed); 
-        color: white; 
-        border-color: #ff5555;
-        box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); 
-        animation: pulse 1.5s infinite;
-    }
-    @keyframes pulse { 
-        0% { transform: scale(1); box-shadow: 0 0 10px var(--bleed); }
-        50% { transform: scale(1.03); box-shadow: 0 0 25px var(--bleed); }
-        100% { transform: scale(1); box-shadow: 0 0 10px var(--bleed); }
-    }
-
-    .intel-box { background: rgba(199, 130, 143, 0.05); border-left: 3px solid var(--accent); padding: 20px; margin: 20px 0; font-size: 0.85rem; border-radius: 0 12px 12px 0; }
-    button.save-btn { background: var(--accent); color: var(--card); border: none; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; cursor: pointer; }
-    .entry { background: var(--card); padding: 20px; border-radius: 12px; margin-top: 15px; border-left: 5px solid var(--accent); }
-    .entry.is-bleeding { border-left: 5px solid var(--bleed); }
-    input[type="range"] { width: 100%; accent-color: var(--accent); margin-bottom: 10px; }
-</style>
-```
-
+        .intel-box { background: rgba(199, 130, 143, 0.05); border-left: 3px solid var(--accent); padding: 20px; margin: 20px 0; font-size: 0.85rem; border-radius: 0 12px 12px 0; min-height: 40px; }
+        button.save-btn { background: var(--accent); color: var(--card); border: none; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; cursor: pointer; }
+        .entry { background: var(--card); padding: 20px; border-radius: 12px; margin-top: 15px; border-left: 5px solid var(--accent); }
+        .entry.is-bleeding { border-left: 5px solid var(--bleed); }
+        input[type="range"] { width: 100%; accent-color: var(--accent); margin-bottom: 10px; }
+        
+        .social-links { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(199, 130, 143, 0.2); margin-bottom: 20px; }
+        .social-links a { color: var(--accent); text-decoration: none; font-size: 0.7rem; margin: 0 10px; font-weight: 600; letter-spacing: 1px; opacity: 0.8; }
+    </style>
 </head>
 <body>
 
-<h1>CIKLS</h1>
-<p style="text-align:center; font-size: 0.6rem; letter-spacing: 3px; opacity: 0.7; margin-bottom: 30px;">SIEVIŠĶĀ OPERĒTĀJSISTĒMA</p>
+    <h1>CIKLS</h1>
+    <p style="text-align:center; font-size: 0.6rem; letter-spacing: 3px; opacity: 0.7; margin-bottom: 30px;">SIEVIŠĶĀ OPERĒTĀJSISTĒMA</p>
 
-<div id="bleedToggle" onclick="toggleBleed()">sistēmas atjauninājums: OFF</div>
+    <div id="bleedToggle" onclick="toggleBleed()">sistēmas atjauninājums: OFF</div>
 
-<div class="card">
-    <label>miega kvalitāte (1=vilkatis, 5=kaķis)</label>
-    <div id="sleepVal" style="text-align:center;font-weight:bold;color:var(--accent);font-size:1.2rem;">3</div>
-    <input type="range" id="sleep" min="1" max="5" value="3" oninput="sleepVal.innerText=this.value">
+    <div class="card">
+        <label>miega kvalitāte (1=vilkatis, 5=kaķis)</label>
+        <div style="text-align: center; font-weight: bold; color: var(--accent); font-size: 1.2rem;" id="sleepVal">3</div>
+        <input type="range" id="sleep" min="1" max="5" value="3" oninput="document.getElementById('sleepVal').innerText = this.value">
 
-```
-<label>smadzeņu kapacitāte</label>
-<select id="vibe" onchange="updateIntel()">
-    <option value="kosmiskā CEO">kosmiskā CEO: visi malā, es te eju!</option>
-    <option value="error 404">error 404: domas nav atrastas</option>
-    <option value="sociālā baterija: 100%">sociālā baterija 100%: sabiedrības dvēsele</option>
-    <option value="slēptās funkcijas: ON">slēptās funcijas ON: lasu starp rindiņām</option>
-</select>
+        <label>smadzeņu kapacitāte</label>
+        <select id="vibe" onchange="updateIntel()">
+            <option value="kosmiskā CEO">kosmiskā CEO: visi malā, es te eju!</option>
+            <option value="error 404">error 404: domas nav atrastas</option>
+            <option value="sociālā baterija: 100%">sociālā baterija 100%: sabiedrības dvēsele</option>
+            <option value="slēptās funkcijas: ON">slēptās funcijas ON: lasu starp rindiņām</option>
+        </select>
 
-<label>garšo ēst</label>
-<div class="chip-grid">
-    <div class="chip craving" onclick="chipToggle(this)" data-id="Salt">sāļš</div>
-    <div class="chip craving" onclick="chipToggle(this)" data-id="Sweet">salds</div>
-    <div class="chip craving" onclick="chipToggle(this)" data-id="Savory">sātīgs</div>
-    <div class="chip craving" onclick="chipToggle(this)" data-id="Spicy">asumiņš</div>
-    <div class="chip craving" onclick="chipToggle(this)" data-id="Sour">skābs</div>
-    <div class="chip craving" onclick="chipToggle(this)" data-id="Bitter">rūgts</div>
-    <div class="chip craving" onclick="chipToggle(this)" data-id="Crunchy">kraukšķis</div>
-    <div class="chip craving" onclick="chipToggle(this)" data-id="Creamy">krēmīgs</div>
-    <div class="chip craving" onclick="chipToggle(this)" data-id="Warm">silts</div>
-    <div class="chip craving" onclick="chipToggle(this)" data-id="Cold">auksts</div>
-</div>
+        <label>garšo ēst </label>
+        <div class="chip-grid">
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Salt">sāļš</div>
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Sweet">salds</div>
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Savory">sātīgs</div>
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Spicy">asumiņš</div>
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Sour">skābs</div>
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Bitter">rūgts</div>
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Crunchy">kraukšķis</div>
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Creamy">krēmīgs</div>
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Warm">silts</div>
+            <div class="chip craving" onclick="chipToggle(this)" data-id="Cold">auksts</div>
+        </div>
 
-<label>laiks man</label>
-<div class="chip-grid">
-    <div class="chip ritual" onclick="this.classList.toggle('active')">atpūtos</div>
-    <div class="chip ritual" onclick="this.classList.toggle('active')">palasīju grāmatu/paskatījos TV</div>
-    <div class="chip ritual" onclick="this.classList.toggle('active')">pasūtīju visus d***t</div>
-    <div class="chip ritual" onclick="this.classList.toggle('active')">nosnaudos</div>
-    <div class="chip ritual" onclick="this.classList.toggle('active')">izkustējos/pasportoju</div>
-    <div class="chip ritual" onclick="this.classList.toggle('active')">pameditēju</div>
-    <div class="chip ritual" onclick="this.classList.toggle('active')">kārtīgi paēdu</div>
-    <div class="chip ritual" onclick="this.classList.toggle('active')">uzņēmu gana daudz ūdens</div>
-    <div class="chip ritual" onclick="this.classList.toggle('active')">aizsēdējos internetā</div>
-    <div class="chip ritual" onclick="this.classList.toggle('active')">darīju visu to, kas nebija svarīgi</div>
-    <div class="chip ritual" onclick="this.classList.toggle('active')">pārvērtu skābekli ogļskābajā gāzē</div>
-</div>
+        <label>laiks man</label>
+        <div class="chip-grid">
+            <div class="chip ritual" onclick="this.classList.toggle('active')">atpūtos</div>
+            <div class="chip ritual" onclick="this.classList.toggle('active')">palasīju grāmatu/TV</div>
+            <div class="chip ritual" onclick="this.classList.toggle('active')">pasūtīju visus d***t</div>
+            <div class="chip ritual" onclick="this.classList.toggle('active')">nosnaudos</div>
+            <div class="chip ritual" onclick="this.classList.toggle('active')">izkustējos</div>
+            <div class="chip ritual" onclick="this.classList.toggle('active')">pameditēju</div>
+            <div class="chip ritual" onclick="this.classList.toggle('active')">kārtīgi paēdu</div>
+            <div class="chip ritual" onclick="this.classList.toggle('active')">dzēru ūdeni</div>
+            <div class="chip ritual" onclick="this.classList.toggle('active')">aizsēdējos internetā</div>
+            <div class="chip ritual" onclick="this.classList.toggle('active')">darīju nesvarīgo</div>
+        </div>
 
-<div class="intel-box" id="intel">nolasu enerģiju...</div>
-```
-
-</div>
-
-<div class="card">
-    <label>palīdzēja?</label>
-
-```
-<div id="helpVal" style="text-align:center;font-weight:bold;color:var(--accent);font-size:1.2rem;">nezinu 🤷‍♀️</div>
-
-<input type="range" id="help" min="1" max="3" value="2"
-    oninput="
-    const labels=['nē','nezinu 🤷‍♀️','jā'];
-    helpVal.innerText=labels[this.value-1];
-">
-
-<div style="display:flex;justify-content:space-between;font-size:0.8rem;opacity:0.7;">
-    <span>nē</span>
-    <span>nezinu</span>
-    <span>jā</span>
-</div>
-
-<label>manas domas un sajūtas</label>
-<textarea id="notes" rows="3" placeholder="ieraksti savu haosu šeit..."></textarea>
-
-<button class="save-btn" onclick="save()">saglabāt datus</button>
-```
-
-</div>
-
-<div id="history"></div>
-
-<script>
-const modeIntel = {...}; // (same as yours, unchanged)
-
-const craveIntel = {...}; // (same as yours, unchanged)
-
-function toggleBleed(){
-    const b=bleedToggle;
-    b.classList.toggle('active');
-    b.innerText=b.classList.contains('active')?"sistēmas atjauninājums: ON":"sistēmas atjauninājums: OFF";
-}
-
-function chipToggle(el){
-    el.classList.toggle('active');
-    updateIntel();
-}
-
-function updateIntel(){
-    const v=vibe.value;
-    const active=[...document.querySelectorAll('.chip.craving.active')].map(c=>c.dataset.id);
-    let msg=modeIntel[v]||"";
-    if(active.length){
-        msg+="<br><br>";
-        active.forEach(id=>{if(craveIntel[id]) msg+=craveIntel[id]+" ";});
-    }
-    intel.innerHTML=msg;
-}
-
-function save(){
-    const entry={
-        date:new Date().toLocaleDateString('lv-LV'),
-        sleep:sleep.value,
-        vibe:vibe.value,
-        bleeding:bleedToggle.classList.contains('active'),
-        cravings:[...document.querySelectorAll('.chip.craving.active')].map(c=>c.innerText),
-        rituals:[...document.querySelectorAll('.chip.ritual.active')].map(c=>c.innerText),
-        help:help.value,
-        notes:notes.value
-    };
-
-    let h=JSON.parse(localStorage.getItem('bladeLV_v3'))||[];
-    h.unshift(entry);
-    localStorage.setItem('bladeLV_v3',JSON.stringify(h));
-    location.reload();
-}
-
-function load(){
-    let h=JSON.parse(localStorage.getItem('bladeLV_v3'))||[];
-    let html="";
-
-    h.forEach(e=>{
-        const helpLabels=['nē','nezinu 🤷‍♀️','jā'];
-        const helpText=helpLabels[e.help-1]||'-';
-
-        html+=`<div class="entry ${e.bleeding?'is-bleeding':''}">
-        <strong>${e.date}</strong> | ${e.bleeding?'🩸 PLŪDI | ':''}${e.vibe}
-        <br>
-        <small>miegs: ${e.sleep}/5 | garšo: ${e.cravings.join(', ')||'-'}</small>
-        <br>
-        <small>rūpes: ${e.rituals.join(', ')||'-'}</small>
-        <br>
-        <small>palīdzēja: ${helpText}</small>
-        <p>${e.notes}</p>
-        </div>`;
-    });
-
-    history.innerHTML=html;
-}
-
-load();
-updateIntel();
-</script>
-
-<footer style="text-align:center;font-size:0.7rem;opacity:0.7;margin:40px 0 10px;">
-    <p>radīts ar haosu</p>
-    <div style="display:flex;justify-content:center;gap:15px;margin-top:10px;">
-        <a href="https://www.instagram.com/zimolsnoenas/" target="_blank" style="color:var(--accent);text-decoration:none;">Instagram</a>
-        <a href="https://www.youtube.com/@zimolsnoenas" target="_blank" style="color:var(--accent);text-decoration:none;">YouTube</a>
+        <div class="intel-box" id="intel">nolasu enerģiju...</div>
     </div>
-</footer>
 
+    <div class="card">
+        <label>jūties labāk?</label>
+        <div style="text-align: center; font-weight: bold; color: var(--accent); font-size: 1.2rem;" id="helpVal">nezinu 🤷‍♀️</div>
+        
+        <input 
+            type="range" 
+            id="help" 
+            min="1" 
+            max="3" 
+            value="2"
+            oninput="
+                const labels = ['nē', 'nezinu 🤷‍♀️', 'jā'];
+                document.getElementById('helpVal').innerText = labels[this.value - 1];
+            "
+        > 
+        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; opacity: 0.7; margin-bottom: 20px;">
+            <span>nē</span>
+            <span>nezinu</span>
+            <span>jā</span>
+        </div>
+
+        <label>manas domas un sajūtas</label>
+        <textarea id="notes" rows="3" placeholder="ieraksti savu haosu šeit..."></textarea>
+
+        <button class="save-btn" onclick="save()">saglabāt datus</button>
+    </div>
+
+    <div id="history"></div>
+
+    <div class="social-links">
+        <a href="https://www.instagram.com/zimolsnoenas/" target="_blank">INSTAGRAM</a>
+        <a href="https://www.youtube.com/@zimolsnoenas" target="_blank">YOUTUBE</a>
+    </div>
+
+    <p style="text-align:center; font-size:0.6rem; opacity:0.5; margin-bottom:40px;">radīts ar haosu</p>
+
+    <script>
+        const modeIntel = {
+            "kosmiskā CEO": "<b>šodienas frekvence:</b> biznesa lēdijas režīms. esi redzama, skaļa un parādi pasaulei, ka esi šeit.",
+            "error 404": "<b>šodienas frekvence:</b> šī ir Tava oficiālā atļauja šodien būt aizkadrā. nenoslogo sevi ar uzdevumiem.",
+            "sociālā baterija: 100%": "<b>šodienas frekvence:</b> šodien Tev ir atvērusies kosmiska čakra. labs laiks komunikācijai.",
+            "slēptās funkcijas: ON": "<b>šodienas frekvence:</b> stratēģija ir Tavs otrais vārds. labs laiks izravēt savu saturu."
+        };
+
+        const craveIntel = {
+            Salt: "<b>sistēma:</b> organisms grib minerāļus. pievērs uzmanību asinsspiedienam.",
+            Sweet: "<b>sistēma:</b> organisms pieprasa enerģiju / dopamīnu. pievērs uzmanību miega kvalitātei.",
+            Savory: "<b>sistēma:</b> gribas proteīnus un dzelzi. atpūta ir produktīvākais šobrīd.",
+            Spicy: "<b>sistēma:</b> endorfīnu medības! pievērs uzmanību vispārīgai pašsajūtai.",
+            Sour: "<b>sistēma:</b> gremošanas trakts prasa palīdzību. pievērs uzmanību sajūtām pēc ēšanas.",
+            Bitter: "<b>sistēma:</b> aknas grib palīdzību izvadei. rūgti ēdieni 'atdzesē'.",
+            Crunchy: "<b>sistēma:</b> ķermenis grib atbrīvoties no spriedzes. kraukšķi palīdz atslābt.",
+            Creamy: "<b>sistēma:</b> ķermenis alkst pēc maiguma. pievērs uzmanību emocijām.",
+            Warm: "<b>sistēma:</b> ķermenis vēlas drošību un sazemējumu.",
+            Cold: "<b>sistēma:</b> ķermenis vēlas 'pamosties' vai atvēsināties."
+        };
+
+        function toggleBleed() {
+            const b = document.getElementById('bleedToggle');
+            b.classList.toggle('active');
+            b.innerText = b.classList.contains('active') ? "sistēmas atjauninājums: ON" : "sistēmas atjauninājums: OFF";
+        }
+
+        function chipToggle(el) {
+            el.classList.toggle('active');
+            updateIntel();
+        }
+
+        function updateIntel() {
+            const v = document.getElementById('vibe').value;
+            const activeCraveIds = Array.from(document.querySelectorAll('.chip.craving.active')).map(c => c.getAttribute('data-id'));
+            let msg = modeIntel[v] || "";
+            if(activeCraveIds.length > 0) {
+                msg += "<br><br>";
+                activeCraveIds.forEach(id => { if(craveIntel[id]) msg += craveIntel[id] + " "; });
+            }
+            document.getElementById('intel').innerHTML = msg;
+        }
+
+        function save() {
+            const entry = {
+                date: new Date().toLocaleDateString('lv-LV'),
+                sleep: document.getElementById('sleep').value,
+                vibe: document.getElementById('vibe').value,
+                bleeding: document.getElementById('bleedToggle').classList.contains('active'),
+                cravings: Array.from(document.querySelectorAll('.chip.craving.active')).map(c => c.innerText),
+                rituals: Array.from(document.querySelectorAll('.chip.ritual.active')).map(c => c.innerText),
+                notes: document.getElementById('notes').value,
+                help: document.getElementById('help').value
+            };
+            let h = JSON.parse(localStorage.getItem('bladeLV_v5')) || [];
+            h.unshift(entry);
+            localStorage.setItem('bladeLV_v5', JSON.stringify(h));
+            location.reload(); 
+        }
+
+        function load() {
+            let h = JSON.parse(localStorage.getItem('bladeLV_v5')) || [];
+            const container = document.getElementById('history');
+            const helpLabels = ['nē', 'nezinu 🤷‍♀️', 'jā'];
+            let html = "";
+
+            h.forEach(e => {
+                const bClass = e.bleeding ? 'is-bleeding' : '';
+                const bTag = e.bleeding ? '<span style="color:var(--bleed)">🩸 PLŪDI</span> | ' : '';
+                const helpText = helpLabels[e.help - 1] || 'nezinu';
+
+                html += `<div class="entry ${bClass}">
+                    <strong>${e.date}</strong> | ${bTag}${e.vibe}
+                    <br>
+                    <small>MIEGS: ${e.sleep}/5 | PALĪDZĒJA: ${helpText}</small>
+                    <br>
+                    <small>GARŠOJA: ${e.cravings.join(', ') || '-'}</small>
+                    <br>
+                    <small>RŪPES: ${e.rituals.join(', ') || '-'}</small>
+                    <p style="margin-top:10px; border-top: 1px solid rgba(199,130,143,0.1); padding-top:10px;">${e.notes}</p>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        load();
+        updateIntel();
+    </script>
 </body>
 </html>
-
-
-
-
-
