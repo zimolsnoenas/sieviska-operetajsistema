@@ -45,6 +45,9 @@
         .entry { background: var(--card); padding: 20px; border-radius: 12px; margin-top: 15px; border-left: 5px solid var(--accent); }
         .entry.is-bleeding { border-left: 5px solid var(--bleed); }
         input[type="range"] { width: 100%; accent-color: var(--accent); margin-bottom: 10px; }
+        
+        .social-links { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(199, 130, 143, 0.2); margin-bottom: 20px; }
+        .social-links a { color: var(--accent); text-decoration: none; font-size: 0.7rem; margin: 0 10px; font-weight: 600; letter-spacing: 1px; opacity: 0.8; }
     </style>
 </head>
 <body>
@@ -55,7 +58,7 @@
     <div id="bleedToggle" onclick="toggleBleed()">sistēmas atjauninājums: OFF</div>
 
     <div class="card">
-        <label>Miega kvalitāte (1=vilkatis, 5=kaķis)</label>
+        <label>miega kvalitāte (1=vilkatis, 5=kaķis)</label>
         <div style="text-align: center; font-weight: bold; color: var(--accent); font-size: 1.2rem;" id="sleepVal">3</div>
         <input type="range" id="sleep" min="1" max="5" value="3" oninput="document.getElementById('sleepVal').innerText = this.value">
 
@@ -127,13 +130,12 @@
 
     <div id="history"></div>
 
-    <footer style="text-align:center; font-size:0.7rem; opacity:0.7; margin:40px 0 10px;">
-        <p>radīts ar haosu</p>
-        <div style="display:flex; justify-content:center; gap: 15px; margin-top:10px;">
-            <a href="https://www.instagram.com/zimolsnoenas/" target="_blank" style="color:var(--accent); text-decoration:none;">Instagram</a>
-            <a href="https://www.youtube.com/@zimolsnoenas" target="_blank" style="color:var(--accent); text-decoration:none;">YouTube</a>
-        </div>
-    </footer>
+    <div class="social-links">
+        <a href="https://www.instagram.com/zimolsnoenas/" target="_blank">INSTAGRAM</a>
+        <a href="https://www.youtube.com/@zimolsnoenas" target="_blank">YOUTUBE</a>
+    </div>
+
+    <p style="text-align:center; font-size:0.6rem; opacity:0.5; margin-bottom:40px;">radīts ar haosu</p>
 
     <script>
         const modeIntel = {
@@ -189,14 +191,14 @@
                 notes: document.getElementById('notes').value,
                 help: document.getElementById('help').value
             };
-            let h = JSON.parse(localStorage.getItem('bladeLV_v3')) || [];
+            let h = JSON.parse(localStorage.getItem('bladeLV_v5')) || [];
             h.unshift(entry);
-            localStorage.setItem('bladeLV_v3', JSON.stringify(h));
+            localStorage.setItem('bladeLV_v5', JSON.stringify(h));
             location.reload(); 
         }
 
         function load() {
-            let h = JSON.parse(localStorage.getItem('bladeLV_v3')) || [];
+            let h = JSON.parse(localStorage.getItem('bladeLV_v5')) || [];
             const container = document.getElementById('history');
             const helpLabels = ['nē', 'nezinu 🤷‍♀️', 'jā'];
             let html = "";
@@ -204,17 +206,17 @@
             h.forEach(e => {
                 const bClass = e.bleeding ? 'is-bleeding' : '';
                 const bTag = e.bleeding ? '<span style="color:var(--bleed)">🩸 PLŪDI</span> | ' : '';
-                const helpText = helpLabels[e.help - 1] || '-';
+                const helpText = helpLabels[e.help - 1] || 'nezinu';
 
                 html += `<div class="entry ${bClass}">
                     <strong>${e.date}</strong> | ${bTag}${e.vibe}
                     <br>
-                    <small>miegs: ${e.sleep}/5 | palīdzēja: ${helpText}</small>
+                    <small>MIEGS: ${e.sleep}/5 | PALĪDZĒJA: ${helpText}</small>
                     <br>
-                    <small>garšo: ${e.cravings.join(', ') || '-'}</small>
+                    <small>GARŠOJA: ${e.cravings.join(', ') || '-'}</small>
                     <br>
-                    <small>rūpes: ${e.rituals.join(', ') || '-'}</small>
-                    <p style="margin-top:10px; font-style:italic;">${e.notes}</p>
+                    <small>RŪPES: ${e.rituals.join(', ') || '-'}</small>
+                    <p style="margin-top:10px; border-top: 1px solid rgba(199,130,143,0.1); padding-top:10px;">${e.notes}</p>
                 </div>`;
             });
             container.innerHTML = html;
