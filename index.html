@@ -42,6 +42,23 @@
 
         .intel-box { background: rgba(199, 130, 143, 0.05); border-left: 3px solid var(--accent); padding: 20px; margin: 20px 0; font-size: 0.85rem; border-radius: 0 12px 12px 0; min-height: 40px; }
         button.save-btn { background: var(--accent); color: var(--card); border: none; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; cursor: pointer; }
+        .export-btn {
+    width: 100%;
+    background: transparent;
+    border: 2px dashed var(--accent);
+    color: var(--accent);
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.export-btn:hover {
+    background: rgba(199, 130, 143, 0.1);
+}
         .entry { background: var(--card); padding: 20px; border-radius: 12px; margin-top: 15px; border-left: 5px solid var(--accent); }
         .entry.is-bleeding { border-left: 5px solid var(--bleed); }
         input[type="range"] { width: 100%; accent-color: var(--accent); margin-bottom: 10px; }
@@ -127,7 +144,8 @@
 
         <button class="save-btn" onclick="save()">saglabāt datus</button>
     </div>
-
+    <button class="export-btn" onclick="copyAllEntries()">KOPĒT VISUS DATUS (MI ANALĪZEI)</button>
+<div id="history"></div>
     <div id="history"></div>
 
     <div class="social-links">
@@ -221,7 +239,37 @@
             });
             container.innerHTML = html;
         }
+        function copyAllEntries() {
+    let h = JSON.parse(localStorage.getItem('bladeLV_v5')) || [];
+    if (h.length === 0) {
+        alert("Nav datu, ko kopēt!");
+        return;
+    }
 
+    let fullExport = "🩸 BLADE OS: SOMATIC DATA EXPORT\n--------------------------\n\n";
+
+    h.forEach(e => {
+        const helpLabels = ['nē', 'nezinu 🤷‍♀️', 'jā'];
+        const helpText = helpLabels[e.help - 1] || 'nezinu';
+        const bleedStatus = e.bleeding ? "ON" : "OFF";
+
+        fullExport += `DATS: ${e.date}\n`;
+        fullExport += `SISTĒMAS ATJAUNINĀJUMS (BLEED): ${bleedStatus}\n`;
+        fullExport += `REŽĪMS: ${e.vibe}\n`;
+        fullExport += `MIEGS: ${e.sleep}/5 | PALĪDZĒJA: ${helpText}\n`;
+        fullExport += `GARŠOJA: ${e.cravings.join(', ') || '-'}\n`;
+        fullExport += `RŪPES: ${e.rituals.join(', ') || '-'}\n`;
+        fullExport += `PIEZĪMES: ${e.notes || '-'}\n`;
+        fullExport += `--------------------------\n`;
+    });
+
+    navigator.clipboard.writeText(fullExport).then(() => {
+        alert("Visi dati nokopēti! Ielīmē tos savā AI rīkā vai piezīmēs. 🚀");
+    }).catch(err => {
+        console.error('Kļūda kopējot:', err);
+        alert("Neizdevās nokopēt automātiski. Pārbaudi pārlūka atļaujas.");
+    });
+}
         load();
         updateIntel();
     </script>
