@@ -87,6 +87,16 @@
             <option value="slēptās funkcijas: ON">slēptās funcijas ON: lasu starp rindiņām</option>
         </select>
 
+        <label>ķermeņa stāvoklis</label>
+        <div class="chip-grid">
+            <div class="chip body-state" onclick="this.classList.toggle('active')">saspringts</div>
+            <div class="chip body-state" onclick="this.classList.toggle('active')">noguris</div>
+            <div class="chip body-state" onclick="this.classList.toggle('active')">trauksmes sajūta</div>
+            <div class="chip body-state" onclick="this.classList.toggle('active')">sieviete dieviete</div>
+            <div class="chip body-state" onclick="this.classList.toggle('active')">chilloju</div>
+            <div class="chip body-state" onclick="this.classList.toggle('active')">??? kas notiek 😄</div>
+        </div>
+        
         <label>garšo ēst </label>
         <div class="chip-grid">
             <div class="chip craving" onclick="chipToggle(this)" data-id="Salt">sāļš</div>
@@ -145,7 +155,6 @@
         <button class="save-btn" onclick="save()">saglabāt datus</button>
     </div>
     <button class="export-btn" onclick="copyAllEntries()">KOPĒT VISUS DATUS (MI ANALĪZEI)</button>
-<div id="history"></div>
     <div id="history"></div>
 
     <div class="social-links">
@@ -203,12 +212,14 @@
                 date: new Date().toLocaleDateString('lv-LV'),
                 sleep: document.getElementById('sleep').value,
                 vibe: document.getElementById('vibe').value,
+                body: Array.from(document.querySelectorAll('.chip.body-state.active')).map(c => c.innerText),
                 bleeding: document.getElementById('bleedToggle').classList.contains('active'),
                 cravings: Array.from(document.querySelectorAll('.chip.craving.active')).map(c => c.innerText),
                 rituals: Array.from(document.querySelectorAll('.chip.ritual.active')).map(c => c.innerText),
                 notes: document.getElementById('notes').value,
                 help: document.getElementById('help').value
             };
+            // Keep using v5 since you just started it!
             let h = JSON.parse(localStorage.getItem('bladeLV_v5')) || [];
             h.unshift(entry);
             localStorage.setItem('bladeLV_v5', JSON.stringify(h));
@@ -229,6 +240,8 @@
                 html += `<div class="entry ${bClass}">
                     <strong>${e.date}</strong> | ${bTag}${e.vibe}
                     <br>
+                    <small>ĶERMENIS: ${e.body ? e.body.join(', ') : '-'}</small>
+                    <br>
                     <small>MIEGS: ${e.sleep}/5 | PALĪDZĒJA: ${helpText}</small>
                     <br>
                     <small>GARŠOJA: ${e.cravings.join(', ') || '-'}</small>
@@ -239,37 +252,35 @@
             });
             container.innerHTML = html;
         }
+
         function copyAllEntries() {
-    let h = JSON.parse(localStorage.getItem('bladeLV_v5')) || [];
-    if (h.length === 0) {
-        alert("Nav datu, ko kopēt!");
-        return;
-    }
+            let h = JSON.parse(localStorage.getItem('bladeLV_v5')) || [];
+            if (h.length === 0) { alert("Nav datu, ko kopēt!"); return; }
 
-    let fullExport = "🩸 BLADE OS: SOMATIC DATA EXPORT\n--------------------------\n\n";
+            let fullExport = "🩸 BLADE OS: SOMATIC DATA EXPORT\n--------------------------\n\n";
+            h.forEach(e => {
+                const helpLabels = ['nē', 'nezinu 🤷‍♀️', 'jā'];
+                const helpText = helpLabels[e.help - 1] || 'nezinu';
+                const bleedStatus = e.bleeding ? "ON" : "OFF";
 
-    h.forEach(e => {
-        const helpLabels = ['nē', 'nezinu 🤷‍♀️', 'jā'];
-        const helpText = helpLabels[e.help - 1] || 'nezinu';
-        const bleedStatus = e.bleeding ? "ON" : "OFF";
+                fullExport += `DATS: ${e.date}\n`;
+                fullExport += `SISTĒMAS ATJAUNINĀJUMS (BLEED): ${bleedStatus}\n`;
+                fullExport += `REŽĪMS: ${e.vibe}\n`;
+                fullExport += `ĶERMENIS: ${e.body ? e.body.join(', ') : '-'}\n`;
+                fullExport += `MIEGS: ${e.sleep}/5 | PALĪDZĒJA: ${helpText}\n`;
+                fullExport += `GARŠOJA: ${e.cravings.join(', ') || '-'}\n`;
+                fullExport += `RŪPES: ${e.rituals.join(', ') || '-'}\n`;
+                fullExport += `PIEZĪMES: ${e.notes || '-'}\n`;
+                fullExport += `--------------------------\n`;
+            });
 
-        fullExport += `DATS: ${e.date}\n`;
-        fullExport += `SISTĒMAS ATJAUNINĀJUMS (BLEED): ${bleedStatus}\n`;
-        fullExport += `REŽĪMS: ${e.vibe}\n`;
-        fullExport += `MIEGS: ${e.sleep}/5 | PALĪDZĒJA: ${helpText}\n`;
-        fullExport += `GARŠOJA: ${e.cravings.join(', ') || '-'}\n`;
-        fullExport += `RŪPES: ${e.rituals.join(', ') || '-'}\n`;
-        fullExport += `PIEZĪMES: ${e.notes || '-'}\n`;
-        fullExport += `--------------------------\n`;
-    });
+            navigator.clipboard.writeText(fullExport).then(() => {
+                alert("Visi dati nokopēti! Ielīmē tos savā AI rīkā vai piezīmēs. 🚀");
+            }).catch(err => {
+                alert("Neizdevās nokopēt automātiski.");
+            });
+        }
 
-    navigator.clipboard.writeText(fullExport).then(() => {
-        alert("Visi dati nokopēti! Ielīmē tos savā AI rīkā vai piezīmēs. 🚀");
-    }).catch(err => {
-        console.error('Kļūda kopējot:', err);
-        alert("Neizdevās nokopēt automātiski. Pārbaudi pārlūka atļaujas.");
-    });
-}
         load();
         updateIntel();
     </script>
